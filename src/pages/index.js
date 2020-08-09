@@ -5,7 +5,8 @@ import {
   Engine,
   RenderClones,
   Walls,
-  Circle
+  Circle,
+  Rectangle
 } from "react-matter-js";
 import Tilt from "react-tilt";
 import { css } from "@emotion/core";
@@ -17,7 +18,7 @@ import _static from "./static.png";
 
 export default function Home() {
   const width = 300+52;
-  const height = (typeof window !== "undefined" ? window.innerHeight : "600") + 52;
+  const height = 3000;
   const words = [
     "that's", "oh", "ohh", "ohhh", "whoa", "woah",
     "hey", "yo", "yoo", "yooo", "really", "very",
@@ -95,6 +96,36 @@ export default function Home() {
               x={100}
               y={100}
               radius={50}
+              options={{
+                restitution: .99
+              }}
+            />
+            <Rectangle
+              clone
+              x={200}
+              y={200}
+              width={60}
+              height={100}
+              options={{
+                restitution: .99
+              }}
+            />
+            <Rectangle
+              clone
+              x={200}
+              y={200}
+              width={70}
+              height={90}
+              options={{
+                restitution: .99
+              }}
+            />
+            <Rectangle
+              clone
+              x={200}
+              y={200}
+              width={80}
+              height={80}
               options={{
                 restitution: .99
               }}

@@ -138,8 +138,8 @@ p#footer a:hover:before {
 
 #physics {
   position: absolute;
-  top: -26px;
   left: -26px;
+  bottom: -26px;
   width: 325px;
   height: calc(100%+26px);
   overflow: hidden;
