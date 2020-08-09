@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet"
 import "./main.css";
 import thumbnail from "./thumbnail.png";
 import meme from "./meme.png";
+import _static from "./static.png";
 
 export default function Home() {
   const words = ["that's", "oh", "ohh", "ohhh", "whoa", "woah", "hey", "yo", "yoo", "yooo", "really", "very", "super", "so", "soo", "sooo", "mega", "ultra", "dang", "too"];
@@ -29,6 +30,7 @@ export default function Home() {
         <meta property="og:site_name" content="cool.lol" />
 
         <link rel="icon" type="image/png" href={meme}/>
+        <link rel="preload" as="image" href={_static}/>
 
         <title>cool.lol</title>
       </Helmet>
