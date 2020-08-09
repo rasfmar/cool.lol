@@ -37,7 +37,7 @@ export default function Home() {
       <div id="wrapper"></div>
       <div id="static"></div>
       <p id="title">{word} cool. lol</p>
-      <a id="footer" href="https://marcusfran.co/">😎 Marcus Franco</a>
+      <a id="footer" href="https://marcusfran.co/"><span role="img" aria-label="a dude with sunglasses">😎</span> Marcus Franco</a>
     </>
   );
 }
