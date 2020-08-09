@@ -14,8 +14,9 @@ export default function Home() {
     "super", "so", "soo", "sooo", "mega", "ultra",
     "dang", "too"
   ];
-  let word = "";
-  word = words[~~(Math.random() * words.length)];
+  const word = words[~~(Math.random() * words.length)];
+
+  window.scrollTo(0,0);
 
   return (
     <>
