@@ -14,7 +14,8 @@ export default function Home() {
     "super", "so", "soo", "sooo", "mega", "ultra",
     "dang", "too"
   ];
-  let word = words[~~(Math.random() * words.length)];
+  let word = "";
+  word = words[~~(Math.random() * words.length)];
 
   return (
     <>
