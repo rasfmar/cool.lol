@@ -1,9 +1,9 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 
-import "../styles/main.css";
-import thumbnail from "../assets/thumbnail.png";
-import meme from "../assets/meme.png";
+import "./main.css";
+import thumbnail from "./thumbnail.png";
+import meme from "./meme.png";
 
 export default function Home() {
   const words = ["that's", "oh", "ohh", "ohhh", "whoa", "woah", "hey", "yo", "yoo", "yooo", "really", "very", "super", "so", "soo", "sooo", "mega", "ultra", "dang", "too"];
