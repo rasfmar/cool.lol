@@ -17,11 +17,6 @@ export default function Home() {
   ];
   const word = words[~~(Math.random() * words.length)];
 
-  window.scrollTo(0, 0);
-  window.onscroll = () => {
-    window.scrollTo(0, 0);
-  };
-
   return (
     <>
       <Helmet>
