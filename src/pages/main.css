@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap');
 
-body {
-  font-family: 'Open Sans', 'Verdana', sans-serif;
+html, body, #___gatsby {
   overflow: hidden;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  font-family: 'Open Sans', 'Verdana', sans-serif;
   color: #fff;
+}
+
+#___gatsby {
+  height: 100vh;
+  padding: 0 8px;
 }
 
 #wrapper {
@@ -58,14 +68,6 @@ p#title {
   padding: 0;
 }
 
-@media screen and (min-width: 779px) {
-  p#title {
-    font-size: 264.86px;
-    letter-spacing: -15.58px;
-    max-width: 779px;
-  }
-}
-
 p#footer a, p#footer a:visited, p#footer a:focus, p#footer a:focus-within, p#footer a:hover, p#footer a:active {
   color: #fff;
   text-decoration: none;
@@ -73,8 +75,8 @@ p#footer a, p#footer a:visited, p#footer a:focus, p#footer a:focus-within, p#foo
 
 p#footer {
   position: absolute;
-  bottom: 1.3em;
-  right: 2em;
+  bottom: 0.1em;
+  right: 0.5em;
   z-index: 1;
 }
 
@@ -105,7 +107,7 @@ p#footer a:hover:before {
   position: absolute;
   top: -1em;
   left: -1em;
-  height: 102vh;
+  height: 200vh;
   width: 800vw;
   background-image: url(./static.png);
   background-repeat: repeat;
@@ -117,3 +119,25 @@ p#footer a:hover:before {
   -o-animation: rainbow 0.5s linear infinite alternate;
   animation: rainbow 0.5s linear infinite alternate;
 }
+
+.Tilt {
+  width: 90vw;
+  mix-blend-mode: color-burn;
+  position: absolute;
+  top: 0;
+}
+
+.Tilt img {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+@media screen and (min-width: 600px) {
+  p#title {
+    font-size: 31vh;
+    letter-spacing: -2vh;
+    max-width: 350px;
+  }
+}
+

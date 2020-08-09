@@ -1,6 +1,7 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 import { OutboundLink } from "gatsby-plugin-google-analytics";
+import Tilt from "react-tilt"
 
 import "./main.css";
 import thumbnail from "./thumbnail.png";
@@ -16,7 +17,10 @@ export default function Home() {
   ];
   const word = words[~~(Math.random() * words.length)];
 
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
+  window.onscroll = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -47,6 +51,9 @@ export default function Home() {
       <div id="static"></div>
 
       <p id="title">{word} cool. lol</p>
+      <Tilt className="Tilt" options={{ max: 25 }}>
+        <img className="Tilt-inner" src={meme} alt="a dude with sunglasses"/>
+      </Tilt>
       <p id="footer">
         emails coming soon | <OutboundLink href="https://marcusfran.co/">Marcus Franco</OutboundLink>
         <span role="img" aria-label="a dude with sunglasses"> 😎</span>
