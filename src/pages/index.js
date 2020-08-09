@@ -1,15 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { OutboundLink } from "gatsby-plugin-google-analytics";
-import {
-  Engine,
-  RenderClones,
-  Walls,
-  Circle,
-  Rectangle
-} from "react-matter-js";
 import Tilt from "react-tilt";
-import { css } from "@emotion/core";
 
 import "./main.css";
 import thumbnail from "./thumbnail.png";
@@ -17,8 +9,6 @@ import meme from "./meme.png";
 import _static from "./static.png";
 
 export default function Home() {
-  const width = 300+52;
-  const height = 3000;
   const words = [
     "that's", "oh", "ohh", "ohhh", "whoa", "woah",
     "hey", "yo", "yoo", "yooo", "really", "very",
@@ -54,85 +44,6 @@ export default function Home() {
 
       <div id="wrapper"></div>
       <div id="static"></div>
-      <div id="physics">
-        <Engine options={{}}>
-          <RenderClones
-            enableMouse
-            options={{
-              width,
-              height,
-              background: "transparent",
-              wireframes: true,
-              wireframeBackground: "transparent"
-            }}
-          >
-            <Walls
-              x={0}
-              y={0}
-              width={width}
-              height={height}
-              wallWidth={25}
-            />
-            <Circle
-              clone
-              x={100}
-              y={100}
-              radius={30}
-              options={{
-                restitution: .99
-              }}
-            />
-            <Circle
-              clone
-              x={100}
-              y={100}
-              radius={40}
-              options={{
-                restitution: .99
-              }}
-            />
-            <Circle
-              clone
-              x={100}
-              y={100}
-              radius={50}
-              options={{
-                restitution: .99
-              }}
-            />
-            <Rectangle
-              clone
-              x={200}
-              y={200}
-              width={60}
-              height={100}
-              options={{
-                restitution: .99
-              }}
-            />
-            <Rectangle
-              clone
-              x={200}
-              y={200}
-              width={70}
-              height={90}
-              options={{
-                restitution: .99
-              }}
-            />
-            <Rectangle
-              clone
-              x={200}
-              y={200}
-              width={80}
-              height={80}
-              options={{
-                restitution: .99
-              }}
-            />
-          </RenderClones>
-        </Engine>
-      </div>
 
       <p id="title">{word} cool. lol</p>
       <Tilt

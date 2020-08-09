@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap');
+@import url('~kursor/dist/kursor.css');
 
 html, body, #___gatsby {
   overflow: hidden;
@@ -134,22 +135,6 @@ p#footer a:hover:before {
   position: relative;
   width: 100vw;
   height: 100vh;
-}
-
-#physics {
-  position: absolute;
-  left: -26px;
-  bottom: -26px;
-  width: 325px;
-  height: calc(100%+26px);
-  overflow: hidden;
-  z-index: 10;
-}
-
-#physics *, #physics svg, #physics svg * {
-  fill: #000;
-  stroke: #000;
-  stroke-width: 1;
 }
 
 @media screen and (min-width: 600px) {
