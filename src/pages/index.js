@@ -40,6 +40,14 @@ export default function Home() {
         <link rel="preload" as="image" href={_static}/>
 
         <title>cool.lol</title>
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156555564-2"/>,
+        <script dangerouslySetInnerHTML={{ __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-156555564-2');`
+        }}/>
       </Helmet>
 
       <div id="wrapper"></div>
