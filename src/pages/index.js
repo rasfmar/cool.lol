@@ -20,7 +20,7 @@ export default function Home() {
     <>
       <Helmet>
         <meta name="keywords" content="cool,lol,cool.lol"/>
-        <meta name="description" content="Page description. No longer than 155 characters." />
+        <meta name="description" content="cool.lol is for when something is cool lol"/>
 
         <meta name="twitter:card" content="cool lol"/>
         <meta name="twitter:site" content="@rasfmar"/>
