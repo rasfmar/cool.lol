@@ -25,7 +25,7 @@ export default function Home() {
         <meta property="og:site_name" content="cool.lol" />
 
         <link rel="stylesheet" type="text/css" href="/main.css"/>
-        <link rel="icon" type="image/png" href="/meme.png">
+        <link rel="icon" type="image/png" href="/meme.png"/>
 
         <title>cool.lol</title>
       </Helmet>
