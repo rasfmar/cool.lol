@@ -8,7 +8,7 @@ module.exports = {
   /* Your site config here */
   plugins: [
     `gatsby-plugin-react-helmet`,
-    {
+    /*{
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-156555564-2",
@@ -21,6 +21,6 @@ module.exports = {
         siteSpeedSampleRate: 10,
         cookieDomain: "cool.lol",
       },
-    },
+    },*/
   ],
 }
