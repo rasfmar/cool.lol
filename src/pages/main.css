@@ -130,7 +130,7 @@ p#footer a:hover:before {
   width: 90vw;
   mix-blend-mode: color-burn;
   position: absolute;
-  top: 0;
+  bottom: 0;
 }
 
 .Tilt img {
