@@ -1,5 +1,6 @@
 import React from "react"
 import { Helmet } from "react-helmet"
+import { OutboundLink } from "gatsby-plugin-google-analytics";
 
 import "./main.css";
 import thumbnail from "./thumbnail.png";
@@ -7,7 +8,12 @@ import meme from "./meme.png";
 import _static from "./static.png";
 
 export default function Home() {
-  const words = ["that's", "oh", "ohh", "ohhh", "whoa", "woah", "hey", "yo", "yoo", "yooo", "really", "very", "super", "so", "soo", "sooo", "mega", "ultra", "dang", "too"];
+  const words = [
+    "that's", "oh", "ohh", "ohhh", "whoa", "woah",
+    "hey", "yo", "yoo", "yooo", "really", "very",
+    "super", "so", "soo", "sooo", "mega", "ultra",
+    "dang", "too"
+  ];
   let word = words[~~(Math.random() * words.length)];
 
   return (
@@ -34,10 +40,15 @@ export default function Home() {
 
         <title>cool.lol</title>
       </Helmet>
+
       <div id="wrapper"></div>
       <div id="static"></div>
+
       <p id="title">{word} cool. lol</p>
-      <a id="footer" href="https://marcusfran.co/"><span role="img" aria-label="a dude with sunglasses">😎</span> Marcus Franco</a>
+      <p id="footer">
+        emails coming soon | <OutboundLink href="https://marcusfran.co/">Marcus Franco</OutboundLink>
+        <span role="img" aria-label="a dude with sunglasses"> 😎</span>
+      </p>
     </>
   );
 }
