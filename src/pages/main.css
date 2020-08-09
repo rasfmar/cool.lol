@@ -3,6 +3,7 @@
 
 html, body, #___gatsby {
   overflow: hidden;
+  cursor: none;
 }
 
 body {
@@ -75,6 +76,7 @@ p#title {
 p#footer a, p#footer a:visited, p#footer a:focus, p#footer a:focus-within, p#footer a:hover, p#footer a:active {
   color: #fff;
   text-decoration: none;
+  cursor: none;
 }
 
 p#footer {
