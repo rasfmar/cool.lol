@@ -2,6 +2,8 @@ import React from "react"
 import { Helmet } from "react-helmet"
 
 import "../styles/main.css";
+import thumbnail from "../assets/thumbnail.png";
+import meme from "../assets/meme.png";
 
 export default function Home() {
   const words = ["that's", "oh", "ohh", "ohhh", "whoa", "woah", "hey", "yo", "yoo", "yooo", "really", "very", "super", "so", "soo", "sooo", "mega", "ultra", "dang", "too"];
@@ -18,15 +20,15 @@ export default function Home() {
         <meta name="twitter:title" content="cool.lol"/>
         <meta name="twitter:description" content="cool lol"/>
         <meta name="twitter:creator" content="@rasfmar"/>
-        <meta name="twitter:image" content="/thumbnail.png"/>
+        <meta name="twitter:image" content={thumbnail}/>
 
         <meta property="og:title" content="cool.lol"/>
         <meta property="og:url" content="https://cool.lol"/>
-        <meta property="og:image" content="/thumbnail.png"/>
+        <meta property="og:image" content={thumbnail}/>
         <meta property="og:description" content="cool lol"/>
         <meta property="og:site_name" content="cool.lol" />
 
-        <link rel="icon" type="image/png" href="/meme.png"/>
+        <link rel="icon" type="image/png" href={meme}/>
 
         <title>cool.lol</title>
       </Helmet>
