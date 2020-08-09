@@ -105,6 +105,7 @@ a#footer:hover:before {
   height: 102vh;
   width: 800vw;
   background-image: url(./static.png);
+  background-size: cover;
   mix-blend-mode: multiply;
   z-index: -10;
 
