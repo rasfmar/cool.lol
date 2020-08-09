@@ -1,6 +1,8 @@
 import React from "react"
 import { Helmet } from "react-helmet"
 
+import "../styles/main.css";
+
 export default function Home() {
   const words = ["that's", "oh", "ohh", "ohhh", "whoa", "woah", "hey", "yo", "yoo", "yooo", "really", "very", "super", "so", "soo", "sooo", "mega", "ultra", "dang", "too"];
   let word = words[~~(Math.random() * words.length)];
@@ -24,7 +26,6 @@ export default function Home() {
         <meta property="og:description" content="cool lol"/>
         <meta property="og:site_name" content="cool.lol" />
 
-        <link rel="stylesheet" type="text/css" href="/main.css"/>
         <link rel="icon" type="image/png" href="/meme.png"/>
 
         <title>cool.lol</title>
