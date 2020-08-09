@@ -1,7 +1,14 @@
-import React from "react"
-import { Helmet } from "react-helmet"
+import React from "react";
+import { Helmet } from "react-helmet";
 import { OutboundLink } from "gatsby-plugin-google-analytics";
-import Tilt from "react-tilt"
+import {
+  Engine,
+  RenderClones,
+  Walls,
+  Circle
+} from "react-matter-js";
+import Tilt from "react-tilt";
+import { css } from "@emotion/core";
 
 import "./main.css";
 import thumbnail from "./thumbnail.png";
@@ -9,6 +16,8 @@ import meme from "./meme.png";
 import _static from "./static.png";
 
 export default function Home() {
+  const width = 300+52;
+  const height = (typeof window !== "undefined" ? window.innerHeight : "600") + 52;
   const words = [
     "that's", "oh", "ohh", "ohhh", "whoa", "woah",
     "hey", "yo", "yoo", "yooo", "really", "very",
@@ -44,9 +53,70 @@ export default function Home() {
 
       <div id="wrapper"></div>
       <div id="static"></div>
+      <div id="physics">
+        <Engine options={{}}>
+          <RenderClones
+            enableMouse
+            options={{
+              width,
+              height,
+              background: "transparent",
+              wireframes: true,
+              wireframeBackground: "transparent"
+            }}
+          >
+            <Walls
+              x={0}
+              y={0}
+              width={width}
+              height={height}
+              wallWidth={25}
+            />
+            <Circle
+              clone
+              x={100}
+              y={100}
+              radius={30}
+              options={{
+                restitution: .99
+              }}
+            />
+            <Circle
+              clone
+              x={100}
+              y={100}
+              radius={40}
+              options={{
+                restitution: .99
+              }}
+            />
+            <Circle
+              clone
+              x={100}
+              y={100}
+              radius={50}
+              options={{
+                restitution: .99
+              }}
+            />
+          </RenderClones>
+        </Engine>
+      </div>
 
       <p id="title">{word} cool. lol</p>
-      <Tilt className="Tilt" options={{ max: 25 }}>
+      <Tilt
+        className="Tilt"
+        options={{
+          reverse: true,
+          glare: true,
+          gyroscope: true,
+          gyroscopeMinAngleX: -25,
+          gyroscopeMaxAngleX: 25,
+          gyroscopeMinAngleY: -25,
+          gyroscopeMaxAngleY: 25,
+          max: 25
+        }}
+      >
         <img className="Tilt-inner" src={meme} alt="a dude with sunglasses"/>
       </Tilt>
       <p id="footer">

@@ -13,7 +13,6 @@ body {
 
 #___gatsby {
   height: 100vh;
-  padding: 0 8px;
 }
 
 #wrapper {
@@ -57,6 +56,10 @@ body {
   0%{background-position:0% 82%}
   50%{background-position:100% 19%}
   100%{background-position:0% 82%}
+}
+
+p#title, p#footer {
+  padding: 0 8px;
 }
 
 p#title {
@@ -133,6 +136,22 @@ p#footer a:hover:before {
   height: 100vh;
 }
 
+#physics {
+  position: absolute;
+  top: -26px;
+  left: -26px;
+  width: 325px;
+  height: calc(100%+26px);
+  overflow: hidden;
+  z-index: 10;
+}
+
+#physics *, #physics svg, #physics svg * {
+  fill: #000;
+  stroke: #000;
+  stroke-width: 1;
+}
+
 @media screen and (min-width: 600px) {
   p#title {
     font-size: 31vh;
@@ -140,4 +159,3 @@ p#footer a:hover:before {
     max-width: 350px;
   }
 }
-
