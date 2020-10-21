@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { KEY_REGEX, SLUG_REGEX, URL_REGEX, IPV4_REGEX, IPV6_REGEX } from "../config/constants";
+import { KEY_REGEX, SLUG_REGEX, URL_REGEX } from "../config/constants";
 
 const urlSchema = new Schema({
   slug: {

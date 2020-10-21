@@ -3,9 +3,7 @@ import { Router } from "express";
 import * as urlController from "../controllers/urlController";
 
 const urlRouter = Router();
-if (process.env.NODE_ENV === "development") {
-  urlRouter.get("/", urlController.indexGet);
-}
+urlRouter.get("/", urlController.indexGet);
 urlRouter.post("/create", urlController.indexPost);
 urlRouter.get("/get/:slug", urlController.slugGet);
 urlRouter.post("/get/:slug", urlController.slugPost);

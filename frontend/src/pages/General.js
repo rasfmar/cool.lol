@@ -1,4 +1,5 @@
 import React from "react";
+import { OutboundLink } from "react-ga";
 
 const General = ({ children }) => {
   return (
@@ -10,6 +11,12 @@ const General = ({ children }) => {
         <h4>shorten any url</h4>
         {children}
       </div>
+      <OutboundLink
+        eventLabel="marcusfranco"
+        to="https://marcusfran.co"
+      >
+        Marcus Franco 😎
+      </OutboundLink>
     </div>
   );
 };

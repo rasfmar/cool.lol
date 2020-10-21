@@ -8,8 +8,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  font-size: 24px;
   color: #fff;
+  font-size: 16px;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -28,6 +28,13 @@ body {
   display: inline-block;
   margin-top: 45vh;
   transform: translateY(-50%);
+}
+
+.App > a[href] {
+  position: absolute;
+  bottom: 1vmin;
+  right: 1vmin;
+  text-decoration: none;
 }
 
 .static {
@@ -75,7 +82,7 @@ input[type=text] {
   background: transparent;
   border: 4px #fff solid;
   width: 80vw;
-  font-size: 4vmin;
+  font-size: 16px;
   padding: 1em;
   color: #fff;
   font-family: 'Source Sans Pro', sans-serif;
@@ -102,10 +109,17 @@ h4 {
 
 a[href] {
   color: #fff;
+  font-weight: 700;
 
   &:hover, &:focus, &:active {
     background: #000;
     text-decoration: none;
+  }
+}
+
+@media screen and (min-width: 420px) {
+  input[type=text], body {
+    font-size: 4vmin;
   }
 }
 

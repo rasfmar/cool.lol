@@ -4,6 +4,7 @@ import General from "./General";
 import LoadingIcon from "../components/LoadingIcon";
 import axios from "axios";
 import { API_URL } from "../config/constants";
+import Head from "../components/Head";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -39,30 +40,32 @@ const Home = () => {
   }, []);
 
   return (
-    <General>
-      {failed && (
-        <p>server issued an error. your url probably wasn't a url</p>
-      )}
-      {!loading ? (
-        <div>
-          {Object.keys(urlInfo).length === 0 ? (
-            <form onSubmit={onSubmit}>
-              <input type="text" placeholder="enter your long url" required />
-              <input type="submit" value="generate" />
-            </form>
-          ) : (
-            <>
-              <p>your url has been created: <Link to={`/${urlInfo.slug}`}>{`${baseUrl}/${urlInfo.slug}`}</Link></p>
-              <p>your secret access key is: <b>{urlInfo.key}</b></p>
-              <p>the key will allow you to view data for your url (eventually.)</p>
-              <p><b>you will only see it once.</b></p>
-            </>
-          )}
-        </div>
-      ) : (
-        <LoadingIcon />
-      )}
-    </General>
+    <>
+      <Head />
+      <General>
+        {failed && (
+          <p>server issued an error. try again later</p>
+        )}
+        {!loading ? (
+          <div>
+            {Object.keys(urlInfo).length === 0 ? (
+              <form onSubmit={onSubmit}>
+                <input type="text" placeholder="enter your long url" required />
+                <input type="submit" value="generate" />
+              </form>
+            ) : (
+              <>
+                <p>your url has been created: <Link to={`/${urlInfo.slug}`}>{`${baseUrl}/${urlInfo.slug}`}</Link></p>
+                <p>your secret access key is: <b>{urlInfo.key}</b></p>
+                <p>the key will allow you to view data for your url (eventually.)</p>
+              </>
+            )}
+          </div>
+        ) : (
+          <LoadingIcon />
+        )}
+      </General>
+    </>
   );
 };
 

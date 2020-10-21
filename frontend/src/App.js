@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Redirect from "./pages/Redirect";
+import ReactGA from "react-ga";
 
 const App = () => {
+  useEffect(() => {
+    ReactGA.initialize("UA-156555564-2");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+  
   return (
     <Switch>
       <Route exact path="/" component={Home} />

@@ -1,19 +1,74 @@
+import dotenv from "dotenv"; dotenv.config();
 import { Request, Response, NextFunction } from "express";
 import HttpException from "../exceptions/HttpException";
-import { SLUG_REGEX, KEY_REGEX, URL_REGEX/*, IPV6_REGEX, IPV4_REGEX*/ } from "../config/constants";
+import { SLUG_REGEX, KEY_REGEX, URL_REGEX, IPV6_REGEX, IPV4_REGEX } from "../config/constants";
 import CoolURL from "../models/CoolURL";
+import CoolRequest from "../models/CoolRequest";
 import { nanoid } from "nanoid";
+import sha1 from "sha1";
 import { Error } from "mongoose";
 import { MongoError } from "mongodb";
 
+// TODO: track location, not IP, as this would be accessible by those w/ key for slug
+// this gets the IP and hashes it using SHA1
+const getHash = (req: Request) => {
+  let ip = req.headers['x-forwarded-for'] ?? "";
+  if (!ip) {
+    ip = req.connection.remoteAddress ?? "";
+  }
+  if (!IPV6_REGEX.test(`${ip}`) && !IPV4_REGEX.test(`${ip}`)) {
+    throw new HttpException(500, "Internal service error");
+  }
+  return sha1(ip.toString());
+};
+
+const rateLimit = async (ip: string) => {
+  let amt = 0;
+  const rates = await CoolRequest.find({
+    ip: ip
+  });
+  if (rates) {
+    rates.forEach((req) => {
+      const reqObj = req.toObject();
+      // if any requests are older than 1 hour
+      if (Date.now() - reqObj.when >= 60*60*1000) {
+        (async () => {
+          await CoolRequest.deleteOne({
+            _id: reqObj._id
+          });
+        })();
+      } else {
+        amt++;
+      }
+    });
+  }
+  // limit to 8 requests per hour
+  if (amt < 8) {
+    const coolRequest = new CoolRequest({
+      ip: ip,
+      when: Date.now(),
+    });
+    await coolRequest.save();
+  } else {
+    throw new HttpException(429, "Too many requests");
+  }
+};
+
 export const indexGet = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const urls = await CoolURL.find();
-    const response = urls?.map(doc => ({
-      slug: doc.toObject().slug,
-      url: doc.toObject().url
-    }));
-    res.json(response ?? []);
+    if (process.env.NODE_ENV === "development") {
+      const urls = await CoolURL.find();
+      const response = urls?.map(doc => ({
+        slug: doc.toObject().slug,
+        url: doc.toObject().url
+      }));
+      res.json(response ?? []);
+    } else {
+      res.status(200);
+      res.json({
+        message: "OK",
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -21,20 +76,8 @@ export const indexGet = async (req: Request, res: Response, next: NextFunction) 
 
 export const indexPost = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    await rateLimit(getHash(req));
     const { url } = req.body;
-    const ip: string = "";
-    
-    // TODO: track location, not IP, as this is accessible by those w/ key for slug
-    /*
-    let ip = req.headers['x-forwarded-for'] ?? "";
-    if (!ip) {
-      ip = req.connection.remoteAddress ?? "";
-    }
-
-    if (!IPV6_REGEX.test(`${ip}`) && !IPV4_REGEX.test(`${ip}`)) {
-      throw new HttpException(500, "Internal service error");
-    }
-    */
 
     if (!URL_REGEX.test(url)) {
       throw new HttpException(400, "Invalid URL");
@@ -53,7 +96,6 @@ export const indexPost = async (req: Request, res: Response, next: NextFunction)
       slug: slug,
       url: url,
       key: key,
-      ip: ip,
       createdAt: Date.now()
     });
     
@@ -75,6 +117,8 @@ export const indexPost = async (req: Request, res: Response, next: NextFunction)
 
 export const slugGet = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    await rateLimit(getHash(req));
+
     const { slug } = req.params;
     if (!SLUG_REGEX.test(slug)) {
       throw new HttpException(400, "Invalid slug");
@@ -98,19 +142,10 @@ export const slugGet = async (req: Request, res: Response, next: NextFunction) =
 
 export const slugPost = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    await rateLimit(getHash(req));
+
     const { slug } = req.params;
     const { key } = req.body;
-    const ip: string = "";
-    /*
-    let ip = req.headers['x-forwarded-for'] ?? "";
-    if (!ip) {
-      ip = req.connection.remoteAddress ?? "";
-    }
-
-    if (!IPV6_REGEX.test(`${ip}`) && !IPV4_REGEX.test(`${ip}`)) {
-      throw new HttpException(500, "Internal service error");
-    }
-    */
 
     if (!SLUG_REGEX.test(slug) || !KEY_REGEX.test(key)) {
       throw new HttpException(400, "Invalid slug or key");
@@ -121,7 +156,7 @@ export const slugPost = async (req: Request, res: Response, next: NextFunction) 
       if (coolUrl.toObject().key === key) {
         let accesses: object[] = coolUrl.toObject().accesses;
         accesses.push({
-          ip: ip,
+          ip: "",
           time: Date.now()
         });
 
@@ -153,19 +188,10 @@ export const slugPost = async (req: Request, res: Response, next: NextFunction) 
 
 export const slugDeletePost = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    await rateLimit(getHash(req));
+
     const { slug } = req.params;
     const { key } = req.body;
-    const ip: string = "";
-    /*
-    let ip = req.headers['x-forwarded-for'] ?? "";
-    if (!ip) {
-      ip = req.connection.remoteAddress ?? "";
-    }
-
-    if (!IPV6_REGEX.test(`${ip}`) && !IPV4_REGEX.test(`${ip}`)) {
-      throw new HttpException(500, "Internal service error");
-    }
-    */
 
     if (!SLUG_REGEX.test(slug) || !KEY_REGEX.test(key)) {
       throw new HttpException(400, "Invalid slug or key");
@@ -176,7 +202,7 @@ export const slugDeletePost = async (req: Request, res: Response, next: NextFunc
       if (coolUrl.toObject().key === key) {
         let accesses: object[] = coolUrl.toObject().accesses;
         accesses.push({
-          ip: ip,
+          ip: "",
           time: Date.now()
         });
 
@@ -211,18 +237,6 @@ export const slugDeletePost = async (req: Request, res: Response, next: NextFunc
 export const slugClickGet = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { slug } = req.params;
-    const ip: string = "";
-    /*
-    let ip = req.headers["x-forwarded-for"] ?? "";
-    if (!ip) {
-      ip = req.connection.remoteAddress ?? "";
-    }
-
-    if (!IPV6_REGEX.test(`${ip}`) && !IPV4_REGEX.test(`${ip}`)) {
-      throw new HttpException(500, "Internal service error");
-    }
-    */
-
     if (!SLUG_REGEX.test(slug)) {
       throw new HttpException(400, "Invalid slug");
     }
@@ -231,7 +245,7 @@ export const slugClickGet = async (req: Request, res: Response, next: NextFuncti
     if (coolUrl && coolUrl.toObject().deletedAt === -1) {
       let clicks: object[] = coolUrl.toObject().clicks;
       clicks.push({
-        ip: ip,
+        ip: "",
         time: Date.now()
       });
 
