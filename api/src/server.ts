@@ -5,7 +5,7 @@ import morgan from "morgan";
 import cors from "cors";
 import urlRouter from "./routes/urlRoute";
 import { notFoundHandler, errorHandler } from "./controllers/errorHandler";
-import { DEFAULT_MONGODB_URI, DEFAULT_PORT } from "./config/constants";
+import { DEFAULT_MONGODB_URI, DEFAULT_PORT, DEFAULT_CORS_ORIGIN } from "./config/constants";
 import mongoose from "mongoose";
 
 mongoose.connect(process.env.MONGODB_URI || DEFAULT_MONGODB_URI, {
@@ -16,10 +16,12 @@ mongoose.connect(process.env.MONGODB_URI || DEFAULT_MONGODB_URI, {
 const app: Express = express();
 app.use(helmet());
 app.use(morgan("common"));
-app.use(cors());
+
+const origin: string = process.env.CORS_ORIGIN || DEFAULT_CORS_ORIGIN;
+app.use(cors({ origin: origin }));
 app.use(express.json());
 
-app.use("/", urlRouter);
+app.use("/api", urlRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 

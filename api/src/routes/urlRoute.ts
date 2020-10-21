@@ -6,8 +6,10 @@ const urlRouter = Router();
 if (process.env.NODE_ENV === "development") {
   urlRouter.get("/", urlController.indexGet);
 }
-urlRouter.post("/", urlController.indexPost);
-urlRouter.get("/:slug", urlController.slugGet);
-urlRouter.post("/:slug", urlController.slugPost);
+urlRouter.post("/create", urlController.indexPost);
+urlRouter.get("/get/:slug", urlController.slugGet);
+urlRouter.post("/get/:slug", urlController.slugPost);
+urlRouter.get("/click/:slug", urlController.slugClickGet);
+urlRouter.post("/delete/:slug", urlController.slugDeletePost);
 
 export default urlRouter;

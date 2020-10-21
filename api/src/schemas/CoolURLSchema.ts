@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { KEY_REGEX, SLUG_REGEX, URL_REGEX } from "../config/constants";
+import { KEY_REGEX, SLUG_REGEX, URL_REGEX, IPV4_REGEX, IPV6_REGEX } from "../config/constants";
 
 const urlSchema = new Schema({
   slug: {
@@ -18,23 +18,39 @@ const urlSchema = new Schema({
   key: {
     type: String,
     required: [true, "Secret key required"],
+    trim: true,
     match: KEY_REGEX,
     unique: true,
   },
   clicks: {
-    type: Number,
-    default: 0,
-    min: 0,
+    type: Array,
+    default: [],
+  },
+  ip: {
+    type: String,
+    default: "",
+    /*
+    required: true,
+    trim: true,
+    validate: {
+      validator: (v: string) => (IPV4_REGEX.test(v) || IPV6_REGEX.test(v)),
+    },
+    */
+  },
+  accesses: {
+    type: Array,
+    default: [],
   },
   createdAt: {
     type: Number,
     default: 0,
+    required: true,
     min: 0,
   },
   deletedAt: {
     type: Number,
-    default: 0,
-    min: 0,
+    default: -1,
+    min: -1,
   },
 }, {
   collection: "urls",
