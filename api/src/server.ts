@@ -3,9 +3,9 @@ import express, { Express } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
-import urlRouter from "./routes/urlRoute";
-import { notFoundHandler, errorHandler } from "./controllers/errorHandler";
-import { DEFAULT_MONGODB_URI, DEFAULT_PORT, DEFAULT_CORS_ORIGIN } from "./config/constants";
+import urlRouter from "./routes/urlRouter.js";
+import { notFoundHandler, errorHandler } from "./controllers/errorHandler.js";
+import { DEFAULT_MONGODB_URI, DEFAULT_PORT, DEFAULT_CORS_ORIGIN } from "./config/constants.js";
 import mongoose from "mongoose";
 
 mongoose.connect(process.env.MONGODB_URI || DEFAULT_MONGODB_URI, {

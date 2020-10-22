@@ -15,7 +15,7 @@ const General = ({ children }) => {
         eventLabel="marcusfranco"
         to="https://marcusfran.co"
       >
-        Marcus Franco 😎
+        Marcus Franco <span role="img" aria-label="a dude with sunglasses">😎</span>
       </OutboundLink>
     </div>
   );

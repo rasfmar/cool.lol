@@ -22,7 +22,7 @@ const Redirect = ({ match }) => {
       .catch(err => {
         history.push("/");
       });
-  }, []);
+  }, [history, slug]);
 
   return (
     <p>Redirecting</p>
