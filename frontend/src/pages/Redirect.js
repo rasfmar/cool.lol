@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { API_URL, URL_REGEX } from "../config/constants";
+import { URL_REGEX } from "../config/constants";
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 const Redirect = ({ match }) => {
   const { slug } = match.params;
   const history = useHistory();
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:1234/api";
 
   useEffect(() => {
     axios.get(API_URL + "/click/" + slug)
@@ -22,7 +25,7 @@ const Redirect = ({ match }) => {
       .catch(err => {
         history.push("/");
       });
-  }, [history, slug]);
+  }, [history, slug, API_URL]);
 
   return (
     <p>Redirecting</p>
