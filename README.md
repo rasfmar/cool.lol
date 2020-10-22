@@ -3,5 +3,5 @@
 
 * [ ] caching (!!!)
 * [ ] write this readme
-* [ ] license
+* [x] license
 
