@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { URL_REGEX } from "../config/constants";
 import axios from "axios";
@@ -27,9 +27,8 @@ const Redirect = ({ match }) => {
       });
   }, [history, slug, API_URL]);
 
-  return (
-    <p>Redirecting</p>
-  );
+  return null;
 };
 
 export default Redirect;
+
